@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<p><h1>DETAILS</h1></p> 
+<hr>
+{% for user in users %}
+
+  <p>Your details are:</p> 
+  <p> Name: {{ user.user }}   </p> 
+  <p> Email ID: {{ user.email }} </p>
+  <p> Address: {{ user.address }} </p>
+  <p> Phone: {{ user.phone }} </p>
+  <p> Total Income: {{ user.total_income }} </p>
+  <p> Total Expenses: {{ user.total_expense }} </p>
+  <p> Total Savings: {{ user.total_savings }} </p>
+  {% if flag %}
+    <p> Money managed as more than 30% of the total income is saved</p>
+  {% else %}
+    <p> Too many expenses as less than 30% of the total income is saved </p>
+  {% endif %}
+  <hr>
+  {% endfor %}
+  <a href='http://127.0.0.1:8000/main4'>HOME</a></p>
+  <p><a href="{% url 'logout' %}">logout</a></p>
+{% else %}
+  <p>You are not logged in</p>
+  <a href="{% url 'login' %}">login</a>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+
+  Hi {{ user.username }}!
+  
+  
+  Please enter income details.....</p>
+  Please select your username...
+  <form method="post">
+    {% csrf_token %}
+    
+    {{ form.as_p }}
+    <button type="submit">Enter</button>
+  </form>
+  <p>
+    <a href='http://127.0.0.1:8000/main4'>HOME</a></p>
+  <p><a href="{% url 'logout' %}">logout</a></p>
+{% else %}
+  <p>You are not logged in</p>
+  <a href="{% url 'login' %}">login</a>
+{% endif %}
+
+{% endblock %}
